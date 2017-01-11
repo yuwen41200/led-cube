@@ -1,0 +1,10 @@
+.settings/
+Debug/
+Utilities/
+CMSIS/
+HAL_Driver/
+inc/
+startup/
+.project
+.cproject
+LinkerScript.ld
