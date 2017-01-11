@@ -1,10 +1,9 @@
-.settings/
-Debug/
-Utilities/
 CMSIS/
+Debug/
+.settings/
+Utilities/
 HAL_Driver/
-inc/
-startup/
 .project
 .cproject
 LinkerScript.ld
+en.DM00173145.pdf

@@ -1,2 +1,3 @@
-# led-cube
-LED Cube using STM32L476 microcontroller
+# LED Cube #
+
+LED Cube Using STM32L476 Microcontroller
