@@ -1,12 +1,15 @@
 #include "stm32l4xx.h"
 #include "stm32l4xx_nucleo.h"
 #include "74hc595.h"
+#include "hcsr04.h"
 
 led_t leds[5][5][5] = {0};
 int state = 0;
 
 int main() {
+	HAL_Init();
 	_74hc595_init();
+	hcsr04_init();
 	while (1) {
 		switch (state) {
 		case 0:
@@ -62,6 +65,6 @@ int main() {
 		}
 		state = state < 9 ? state + 1 : 0;
 		_74hc595_cube_send(leds);
-		HAL_Delay(1000);
+		HAL_Delay(100);
 	}
 }

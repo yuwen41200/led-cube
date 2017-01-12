@@ -3,7 +3,6 @@
 #include "74hc595.h"
 
 void _74hc595_init() {
-	HAL_Init();
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.Pin = _74HC595_SHCP_PIN | _74HC595_STCP_PIN | _74HC595_DS_PIN;

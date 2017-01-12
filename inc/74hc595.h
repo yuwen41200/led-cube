@@ -10,6 +10,7 @@
 #define _74HC595_DS1_PIN GPIO_PIN_9
 #define _74HC595_DS2_PIN GPIO_PIN_10
 #define _74HC595_DS3_PIN GPIO_PIN_11
+
 #define LED_ON 1;
 #define LED_OFF 0;
 typedef uint8_t led_t;
