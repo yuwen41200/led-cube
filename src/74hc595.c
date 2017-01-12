@@ -56,11 +56,20 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 			_74HC595_GPIO->BSRR = _74HC595_DS2_PIN;
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS2_PIN;
-		// need fix
+		// set output type temporarily
+		GPIO_InitTypeDef GPIO_InitStructure;
+		GPIO_InitStructure.Pin = _74HC595_DS3_PIN;
+		GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+		GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_LOW;
+		HAL_GPIO_Init(_74HC595_GPIO, &GPIO_InitStructure);
 		if (leds[i][4][4])
 			_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
+		GPIO_InitStructure.Pin = _74HC595_DS3_PIN;
+		GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_OD;
+		GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_LOW;
+		HAL_GPIO_Init(_74HC595_GPIO, &GPIO_InitStructure);
 		_74HC595_GPIO->BRR = _74HC595_SHCP_PIN;
 		_74HC595_GPIO->BSRR = _74HC595_SHCP_PIN;
 
