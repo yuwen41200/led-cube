@@ -16,6 +16,7 @@
 typedef uint8_t led_t;
 
 void _74hc595_init();
+void _74hc595_cube_init();
 void _74hc595_send(uint8_t);
 void _74hc595_cube_send(led_t[5][5][5]);
 

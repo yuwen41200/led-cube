@@ -5,10 +5,11 @@
 
 led_t leds[5][5][5] = {0};
 int state = 0;
+float distance = -1;
 
 int main() {
 	HAL_Init();
-	_74hc595_init();
+	_74hc595_cube_init();
 	hcsr04_init();
 	while (1) {
 		switch (state) {
@@ -65,6 +66,7 @@ int main() {
 		}
 		state = state < 9 ? state + 1 : 0;
 		_74hc595_cube_send(leds);
+		distance = hcsr04_echo();
 		HAL_Delay(100);
 	}
 }
