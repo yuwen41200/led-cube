@@ -16,14 +16,9 @@ void _74hc595_cube_init() {
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 	GPIO_InitTypeDef GPIO_InitStructure;
 
-	GPIO_InitStructure.Pin = _74HC595_SHCP_PIN | _74HC595_STCP_PIN |\
-	                         _74HC595_DS0_PIN | _74HC595_DS1_PIN | _74HC595_DS2_PIN;
+	GPIO_InitStructure.Pin = _74HC595_SHCP_PIN | _74HC595_STCP_PIN | _74HC595_DS0_PIN;
+	GPIO_InitStructure.Pin |= _74HC595_DS1_PIN | _74HC595_DS2_PIN | _74HC595_DS3_PIN;
 	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(_74HC595_GPIO, &GPIO_InitStructure);
-
-	GPIO_InitStructure.Pin = _74HC595_DS3_PIN;
-	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_OD;
 	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(_74HC595_GPIO, &GPIO_InitStructure);
 }
@@ -57,9 +52,11 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS2_PIN;
 		// don't care
-		_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
+		_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
 		_74HC595_GPIO->BRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 		_74HC595_GPIO->BSRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 
 		// 7th bit
 		if (leds[i][1][1])
@@ -75,9 +72,11 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS2_PIN;
 		// don't care
-		_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
+		_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
 		_74HC595_GPIO->BRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 		_74HC595_GPIO->BSRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 
 		// 6th bit
 		if (leds[i][1][0])
@@ -92,12 +91,14 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 			_74HC595_GPIO->BSRR = _74HC595_DS2_PIN;
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS2_PIN;
-		if (1/*i == 4*/)
-			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
-		else
+		if (i == 4)
 			_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
+		else
+			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
 		_74HC595_GPIO->BRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 		_74HC595_GPIO->BSRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 
 		// 5th bit
 		if (leds[i][0][4])
@@ -112,12 +113,14 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 			_74HC595_GPIO->BSRR = _74HC595_DS2_PIN;
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS2_PIN;
-		if (1/*i == 3*/)
-			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
-		else
+		if (i == 3)
 			_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
+		else
+			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
 		_74HC595_GPIO->BRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 		_74HC595_GPIO->BSRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 
 		// 4th bit
 		if (leds[i][0][3])
@@ -132,12 +135,14 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 			_74HC595_GPIO->BSRR = _74HC595_DS2_PIN;
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS2_PIN;
-		if (1/*i == 2*/)
-			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
-		else
+		if (i == 2)
 			_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
+		else
+			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
 		_74HC595_GPIO->BRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 		_74HC595_GPIO->BSRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 
 		// 3rd bit
 		if (leds[i][0][2])
@@ -152,12 +157,14 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 			_74HC595_GPIO->BSRR = _74HC595_DS2_PIN;
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS2_PIN;
-		if (1/*i == 1*/)
-			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
-		else
+		if (i == 1)
 			_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
+		else
+			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
 		_74HC595_GPIO->BRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 		_74HC595_GPIO->BSRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 
 		// 2nd bit
 		if (leds[i][0][1])
@@ -172,12 +179,14 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 			_74HC595_GPIO->BSRR = _74HC595_DS2_PIN;
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS2_PIN;
-		if (1/*i == 0*/)
-			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
-		else
+		if (i == 0)
 			_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
+		else
+			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
 		_74HC595_GPIO->BRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 		_74HC595_GPIO->BSRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 
 		// 1st bit
 		if (leds[i][0][0])
@@ -192,26 +201,19 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 			_74HC595_GPIO->BSRR = _74HC595_DS2_PIN;
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS2_PIN;
-		// set output type temporarily
-		GPIO_InitTypeDef GPIO_InitStructure;
-		GPIO_InitStructure.Pin = _74HC595_DS3_PIN;
-		GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
-		GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_LOW;
-		HAL_GPIO_Init(_74HC595_GPIO, &GPIO_InitStructure);
 		if (leds[i][4][4])
 			_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
 		_74HC595_GPIO->BRR = _74HC595_SHCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 		_74HC595_GPIO->BSRR = _74HC595_SHCP_PIN;
-		// reset output type
-		GPIO_InitStructure.Pin = _74HC595_DS3_PIN;
-		GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_OD;
-		GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_LOW;
-		HAL_GPIO_Init(_74HC595_GPIO, &GPIO_InitStructure);
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 
 		// set one layer
 		_74HC595_GPIO->BRR = _74HC595_STCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 		_74HC595_GPIO->BSRR = _74HC595_STCP_PIN;
+		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 	}
 }

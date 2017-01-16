@@ -65,8 +65,8 @@ int main() {
 			break;
 		}
 		state = state < 9 ? state + 1 : 0;
-		_74hc595_cube_send(leds);
+		for (int i = 0; i < 1000; ++i)
+			_74hc595_cube_send(leds);
 		//distance = hcsr04_echo();
-		//HAL_Delay(100);
 	}
 }
