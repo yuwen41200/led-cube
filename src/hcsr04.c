@@ -17,6 +17,8 @@ void hcsr04_init() {
 	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_MEDIUM;
 	GPIO_InitStructure.Pull = GPIO_PULLDOWN;
 	HAL_GPIO_Init(HCSR04_GPIO, &GPIO_InitStructure);
+
+	HCSR04_GPIO->BRR = HCSR04_TRIGGER_PIN;
 }
 
 float hcsr04_echo() {

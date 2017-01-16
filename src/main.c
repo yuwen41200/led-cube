@@ -7,15 +7,20 @@ led_t leds[5][5][5] = {0};
 int state = 0;
 float distance = 2;
 int speed = 100;
+int update = 0;
 
 int main() {
 	HAL_Init();
+	HAL_SYSTICK_Config(12000000);
 	_74hc595_cube_init();
 	hcsr04_init();
 	while (1) {
-		distance = hcsr04_echo();
-		speed = (int) distance * 50;
-		speed = speed < 100 ? 100 : speed > 1000 ? 1000 : speed;
+		if (update) {
+			update = 0;
+			distance = hcsr04_echo();
+			speed = distance > 0 ? (int) distance * 50 : speed;
+			speed = speed < 100 ? 100 : speed > 1000 ? 1000 : speed;
+		}
 		switch (state) {
 		case 0:
 			for (int i = 0; i < 5; ++i)

@@ -20,6 +20,8 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern int update;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -39,4 +41,13 @@ void SysTick_Handler(void)
 #ifdef USE_RTOS_SYSTICK
 	osSystickHandler();
 #endif
+}
+
+/**
+  * @brief  SYSTICK callback.
+  * @retval None
+  */
+void HAL_SYSTICK_Callback(void)
+{
+	update = 1;
 }
