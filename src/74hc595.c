@@ -71,8 +71,10 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 			_74HC595_GPIO->BSRR = _74HC595_DS2_PIN;
 		else
 			_74HC595_GPIO->BRR = _74HC595_DS2_PIN;
-		// don't care
-		_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
+		if (leds[i][0][0])
+			_74HC595_GPIO->BSRR = _74HC595_DS3_PIN;
+		else
+			_74HC595_GPIO->BRR = _74HC595_DS3_PIN;
 		_74HC595_GPIO->BRR = _74HC595_SHCP_PIN;
 		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 		_74HC595_GPIO->BSRR = _74HC595_SHCP_PIN;
@@ -189,10 +191,8 @@ void _74hc595_cube_send(led_t leds[5][5][5]) {
 		asm volatile("mov r0, r0; mov r0, r0; mov r0, r0; mov r0, r0;");
 
 		// 1st bit
-		if (leds[i][0][0])
-			_74HC595_GPIO->BSRR = _74HC595_DS0_PIN;
-		else
-			_74HC595_GPIO->BRR = _74HC595_DS0_PIN;
+		// don't care
+		_74HC595_GPIO->BSRR = _74HC595_DS0_PIN;
 		if (leds[i][1][3])
 			_74HC595_GPIO->BSRR = _74HC595_DS1_PIN;
 		else
