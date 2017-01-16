@@ -7,3 +7,4 @@ HAL_Driver/
 .cproject
 LinkerScript.ld
 en.DM00173145.pdf
+img/*.mp4

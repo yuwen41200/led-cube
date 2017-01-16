@@ -5,13 +5,17 @@
 
 led_t leds[5][5][5] = {0};
 int state = 0;
-float distance = -1;
+float distance = 2;
+int speed = 100;
 
 int main() {
 	HAL_Init();
 	_74hc595_cube_init();
 	hcsr04_init();
 	while (1) {
+		distance = hcsr04_echo();
+		speed = (int) distance * 50;
+		speed = speed < 100 ? 100 : speed > 1000 ? 1000 : speed;
 		switch (state) {
 		case 0:
 			for (int i = 0; i < 5; ++i)
@@ -65,8 +69,7 @@ int main() {
 			break;
 		}
 		state = state < 9 ? state + 1 : 0;
-		for (int i = 0; i < 1000; ++i)
+		for (int i = 0; i < speed; ++i)
 			_74hc595_cube_send(leds);
-		//distance = hcsr04_echo();
 	}
 }
