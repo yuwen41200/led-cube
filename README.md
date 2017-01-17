@@ -16,7 +16,7 @@ LED Cube Using STM32L476 Microcontroller
 
 ## 流程圖 ##
 
-![flow.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/flow.jpg "flow.jpg")
+<img src="https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/flow.jpg" alt="flow.jpg" title="flow.jpg" width="495.4" height="572.2">
 
 ## 功能說明 ##
 
