@@ -11,9 +11,12 @@ LED Cube Using STM32L476 Microcontroller
 
 ## 系統架構 ##
 
+![arch1.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/arch1.jpg "arch1.jpg")
 ![arch2.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/arch2.jpg "arch2.jpg")
 
 ## 流程圖 ##
+
+![flow.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/flow.jpg "flow.jpg")
 
 ## 功能說明 ##
 
@@ -34,10 +37,10 @@ LED Cube Using STM32L476 Microcontroller
 
 ## 成果展示 ##
 
-影片：https://youtu.be/0f-6uI6oZSM
+* 影片：https://youtu.be/0f-6uI6oZSM
 
 ![demo1.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/demo1.jpg "demo1.jpg")
-![demo2.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/demo2.jpg "demo2.jpg")
+<img src="https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/demo2.jpg" alt="demo2.jpg" title="demo2.jpg" width="380" height="672">
 
 ## 遭遇的挑戰與解決方式 ##
 
