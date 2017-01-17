@@ -11,15 +11,33 @@ LED Cube Using STM32L476 Microcontroller
 
 ## 系統架構 ##
 
+![arch2.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/arch2.jpg "arch2.jpg")
+
 ## 流程圖 ##
 
 ## 功能說明 ##
 
 * LED cube 的部分，我們選購高亮度 LED 燈，因為當我們點亮 LED 時，其實是一層一層輪流點亮，LED 燈是不斷閃爍的，所以亮度會降低。首先，先將 LED 燈的正極全部相接（焊起來），之後再將一條一條焊好的 5x1 LED 燈的負極相接（焊起來，就會形成一個面，這個面是由 5x5 的 LED 燈所組成，然後旁邊會有 5 個正極接腳和 5 個負極接腳），然後將 5 片這樣的 LED 平面焊起來（把他們的負極焊在一起，最後只有 5 個負極接腳，即為我們控制各層亮暗之處），使它成為一個 cube，最後我們的 LED cube 下方會有 25 個正極接腳，側邊會有 5 個負極接腳。我們利用電晶體（2N2222）在控制各層亮暗的負極製造斷路或是接地，NPN 電晶體一邊接到 LED cube 的五個負極（集極），base 接到我們的控制訊號，射極接地，我們輸入 high 時即為通路（那一層亮），否則即為斷路（那一層不亮）。透過底下的 25 個正極接腳所給予的訊號跟控制電晶體的訊號共同控制各個 LED 的亮暗。最後將它焊在電木板上，將其接腳跟排針焊在一起，方便插杜邦線（焊時要非常留意焊錫是否有沾黏到不該焊的地方，否則會短路）。
+
+![5x5x5cube.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/5x5x5cube.jpg "5x5x5cube.jpg")
+![full.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/full.jpg "full.jpg")
+
 * 74HC595 內含一個 shift register，提供 8-bit serial-in parallel-out 的功能。只要用一個 MCU 的 GPIO pin 依序輸出八個訊號，就能同時控制八個 LED cube 的輸入。我們設計的 LED cube 一共有 30 個輸入，因此需要四個 74HC595，佔用了 MCU 六個 GPIO pin（四個 serial data 輸出、一個共用的 input clock 輸出，其 positive edge 將觸發 74HC595 shift 一個 bit、一個共用的 output clock 輸出，其 positive edge 將觸發 74HC595 平行輸出當前 shift register 裡的八個 bit）。
+
+![74hc595.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/74hc595.jpg "74hc595.jpg")
+![4x74hc595.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/4x74hc595.jpg "4x74hc595.jpg")
+
 * HC-SR04 是一個超音波感測器，被觸發（收到 10 us 以上的 TRIGGER 訊號）後，它會發送八個脈衝並等待回波。接收到回波後，它會輸出 ECHO 訊號，透過此訊號的長度可以算出物體的距離。長度愈長，距離愈遠。若 MCU 過了太久仍未讀到 ECHO 訊號，則會自動 timeout。我們使用 SysTick 和中斷機制，每三秒偵測一次物體的距離，並依據此距離來調整動畫的速度。距離愈近，速度愈快（但不得超出上、下界）。
 
+![hcsr04.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/hcsr04.jpg "hcsr04.jpg")
+![final.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/final.jpg "final.jpg")
+
 ## 成果展示 ##
+
+影片：https://youtu.be/0f-6uI6oZSM
+
+![demo1.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/demo1.jpg "demo1.jpg")
+![demo2.jpg](https://raw.githubusercontent.com/yuwen41200/led-cube/master/img/demo2.jpg "demo2.jpg")
 
 ## 遭遇的挑戰與解決方式 ##
 
